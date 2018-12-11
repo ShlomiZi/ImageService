@@ -1,0 +1,41 @@
+﻿@using ImageServiceWebApplication.Models;
+@model IEnumerable<ImageServiceWebApplication.Models.Log>
+
+<h2>Logs</h2>
+<div>
+    @using (Html.BeginForm("Logs", "Logs", FormMethod.Post))
+    {
+
+        <div>
+            <br />
+            @Html.DropDownList("typeFilter",
+                         new SelectList(Enum.GetValues(typeof(MessageEnum))),
+                         "Log entry type",
+                         new { @class = "form-control" })
+            <br />
+            <input type="submit" id="Submit" value="Filter" class="btn-info" />
+        </div>
+    }
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+        </tr>
+    }
+</table>
